@@ -2,7 +2,7 @@ const modal = document.querySelector(".confirm-modal");
 const columnsContainer = document.querySelector(".columns");
 const columns = columnsContainer.querySelectorAll(".column");
 
-const tasksElaments = (content) => {
+const tasksElements = (content) => {
     const task = document.createElement("div");
     task.classList.add("task");
     task.innerHTML = `
@@ -22,6 +22,8 @@ const tasksElaments = (content) => {
     columnsContainer.addEventListener('click', (event) =>{
         if(event.target.closest('button[data-add]')) {
             handleAdd(event)
+        }else if(event.target.closest('button[data-edit]')){
+            handleEdit(event)
         }
     })
 
@@ -60,6 +62,13 @@ const tasksElaments = (content) => {
         const content = input.innerText.trim() || 'Untitled';
         const task = createTask(content);
         input.replaceWith(task);
+    }
+
+    const handleEdit = (event) =>{
+        const task = event.target.closest('.task');
+        const input = createTaskInput(task.innerText);
+        task.replaceWith(input);
+        input.focus()
     }
 
     
