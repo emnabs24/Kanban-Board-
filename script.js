@@ -18,3 +18,9 @@ const tasksElaments = (content) => {
         input.value = text;
         return input;
     }
+
+    columnsContainer.addEventListener('click', (event) =>{
+        if(event.target.closest('button[data-add]')) {
+            handleEvent(event)
+        }
+    })
