@@ -1,6 +1,7 @@
 const modal = document.querySelector(".confirm-modal");
 const columnsContainer = document.querySelector(".columns");
 const columns = columnsContainer.querySelectorAll(".column");
+const currentTask = null;
 
 const tasksElements = (content) => {
     const task = document.createElement("div");
@@ -24,6 +25,8 @@ const tasksElements = (content) => {
             handleAdd(event)
         }else if(event.target.closest('button[data-edit]')){
             handleEdit(event)
+        }else if(event.target.closest('button[data-delete]')){
+            handleDelete(event)
         }
     })
 
@@ -69,6 +72,12 @@ const tasksElements = (content) => {
         const input = createTaskInput(task.innerText);
         task.replaceWith(input);
         input.focus()
+    }
+
+    const handleDelete = (event) =>{
+        const currentTask = event.target.closest('.task');
+        modal.querySelector('.preview').innerText = currentTask.innerText.substring(0, 100);
+        modal.showModal()
     }
 
     
