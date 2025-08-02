@@ -24,3 +24,10 @@ const tasksElaments = (content) => {
             handleEvent(event)
         }
     })
+
+    const handleAdd = (event) => {
+    const taskEl = event.target.closest('column').lastElementChild;
+    const input = creatTaskInput();
+    taskEl.appendChild(input)
+    input.focus()
+    }
