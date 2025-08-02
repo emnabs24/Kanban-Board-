@@ -21,13 +21,45 @@ const tasksElaments = (content) => {
 
     columnsContainer.addEventListener('click', (event) =>{
         if(event.target.closest('button[data-add]')) {
-            handleEvent(event)
+            handleAdd(event)
         }
     })
 
+    const createTask = (content) => {
+  const task = document.createElement("div");
+  task.className = "task";
+  task.draggable = "true";
+  task.innerHTML = `<div>${content}</div>
+                <menu>
+                <button data-edit=""><i class="bi bi-pencil-square"></i></button>
+                <button data-delete><i class="bi bi-trash"></i></button>
+              </menu>
+`;
+  return task;
+};
+
+    const createTaskInput = (text = "") => {
+  const input = document.createElement("div");
+  input.className = "task-input";
+  input.contentEditable = true;
+  input.dataset.placeHolder = "Task name";
+  input.innerText = text;
+  input.addEventListener("blur", handleBlur);
+  return input;
+};
+
     const handleAdd = (event) => {
-    const taskEl = event.target.closest('column').lastElementChild;
-    const input = creatTaskInput();
+    const taskEl = event.target.closest('.column').lastElementChild;
+    const input = createTaskInput();
     taskEl.appendChild(input)
     input.focus()
     }
+
+    const handleBlur = (event) => {
+        const input = event.target;
+        const content = input.innerText.trim() || 'Untitled';
+        const task = createTask(content);
+        input.replaceWith(task);
+    }
+
+    
