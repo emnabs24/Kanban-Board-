@@ -10,3 +10,11 @@ const tasksElaments = (content) => {
     `;
         return task;
     }
+
+    const taskInput = (text) => {
+        const input = document.createElement("input");
+        input.type = "text";
+        input.classList.add("task-input");
+        input.value = text;
+        return input;
+    }
