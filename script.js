@@ -63,6 +63,12 @@ const createTaskInput = (text = "") => {
   return input;
 };
 
+tasksElements = columnsContainer.querySelector('.tasks');
+for(const taskEl of tasksElements){
+  taskEl.addEventListener('dragover', handleDragOver);
+  taskEl.addEventListener('drop', handleDrop);
+}
+
 const handleAdd = (event) => {
   const taskEl = event.target.closest(".column").lastElementChild;
   const input = createTaskInput();
