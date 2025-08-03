@@ -45,10 +45,13 @@ const createTask = (content) => {
   return task;
 };
 
-const handleDragStart = (event) =>{
-  requestAnimationFrame(() => event.target.classList.add('dragging'))
-}
+const handleDragStart = (event) => {
+  requestAnimationFrame(() => event.target.classList.add("dragging"));
+};
 
+const handleDragEnd = (event) => {
+  event.target.classList.remove("dragging");
+};
 
 const createTaskInput = (text = "") => {
   const input = document.createElement("div");
