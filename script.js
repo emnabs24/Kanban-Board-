@@ -4,33 +4,33 @@ const columns = columnsContainer.querySelectorAll(".column");
 const currentTask = null;
 
 const tasksElements = (content) => {
-    const task = document.createElement("div");
-    task.classList.add("task");
-    task.innerHTML = `
+  const task = document.createElement("div");
+  task.classList.add("task");
+  task.innerHTML = `
         <div class="task-content">${content}</div>
     `;
-        return task;
-    }
+  return task;
+};
 
-    const taskInput = (text) => {
-        const input = document.createElement("input");
-        input.type = "text";
-        input.classList.add("task-input");
-        input.value = text;
-        return input;
-    }
+const taskInput = (text) => {
+  const input = document.createElement("input");
+  input.type = "text";
+  input.classList.add("task-input");
+  input.value = text;
+  return input;
+};
 
-    columnsContainer.addEventListener('click', (event) =>{
-        if(event.target.closest('button[data-add]')) {
-            handleAdd(event)
-        }else if(event.target.closest('button[data-edit]')){
-            handleEdit(event)
-        }else if(event.target.closest('button[data-delete]')){
-            handleDelete(event)
-        }
-    })
+columnsContainer.addEventListener("click", (event) => {
+  if (event.target.closest("button[data-add]")) {
+    handleAdd(event);
+  } else if (event.target.closest("button[data-edit]")) {
+    handleEdit(event);
+  } else if (event.target.closest("button[data-delete]")) {
+    handleDelete(event);
+  }
+});
 
-    const createTask = (content) => {
+const createTask = (content) => {
   const task = document.createElement("div");
   task.className = "task";
   task.draggable = "true";
@@ -43,7 +43,7 @@ const tasksElements = (content) => {
   return task;
 };
 
-    const createTaskInput = (text = "") => {
+const createTaskInput = (text = "") => {
   const input = document.createElement("div");
   input.className = "task-input";
   input.contentEditable = true;
@@ -53,31 +53,46 @@ const tasksElements = (content) => {
   return input;
 };
 
-    const handleAdd = (event) => {
-    const taskEl = event.target.closest('.column').lastElementChild;
-    const input = createTaskInput();
-    taskEl.appendChild(input)
-    input.focus()
-    }
+const handleAdd = (event) => {
+  const taskEl = event.target.closest(".column").lastElementChild;
+  const input = createTaskInput();
+  taskEl.appendChild(input);
+  input.focus();
+};
 
-    const handleBlur = (event) => {
-        const input = event.target;
-        const content = input.innerText.trim() || 'Untitled';
-        const task = createTask(content);
-        input.replaceWith(task);
-    }
+const handleBlur = (event) => {
+  const input = event.target;
+  const content = input.innerText.trim() || "Untitled";
+  const task = createTask(content);
+  input.replaceWith(task);
+};
 
-    const handleEdit = (event) =>{
-        const task = event.target.closest('.task');
-        const input = createTaskInput(task.innerText);
-        task.replaceWith(input);
-        input.focus()
-    }
+const handleEdit = (event) => {
+  const task = event.target.closest(".task");
+  const input = createTaskInput(task.innerText);
+  task.replaceWith(input);
+  input.focus();
+};
 
-    const handleDelete = (event) =>{
-        const currentTask = event.target.closest('.task');
-        modal.querySelector('.preview').innerText = currentTask.innerText.substring(0, 100);
-        modal.showModal()
-    }
+const handleDelete = (event) => {
+  const currentTask = event.target.closest(".task");
+  modal.querySelector(".preview").innerText = currentTask.innerText.substring(
+    0,
+    100
+  );
+  modal.showModal();
+};
 
-    
+// modal.addEventListener("submit", () => {
+//   modal.querySelector("#modal").addEventListener("click", () => modal.close());
+// });
+
+modal.addEventListener("click", () => {
+  if (currentTask) {
+    currentTask.remove();
+  }
+});
+
+modal.querySelector("#cancel").addEventListener("click", () => modal.close());
+
+
