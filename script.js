@@ -103,3 +103,9 @@ let tasks = [
   ['Take a Walk','Watch youtube videos', 'Gist with my friends'],
   ['Play Golf','Go to Church', 'Play Basketball']
 ]
+
+tasks.forEach((col, i) => {
+  for(let item of col){
+    columns[i].querySelector('.tasks').appendChild(createTask(item));
+  }
+});
