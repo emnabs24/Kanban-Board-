@@ -45,6 +45,11 @@ const createTask = (content) => {
   return task;
 };
 
+const handleDragStart = (event) =>{
+  requestAnimationFrame(() => event.target.classList.add('dragging'))
+}
+
+
 const createTaskInput = (text = "") => {
   const input = document.createElement("div");
   input.className = "task-input";
