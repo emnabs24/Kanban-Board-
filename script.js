@@ -68,7 +68,9 @@ const handleDragOver = (event) =>{
   const draggedTask = document.querySelector('.dragging');
   const target = event.target.closest('.task, .tasks');;
   if(target === '' || target ===draggedTask)return;
-  
+  if(target.classList.contains('tasks')){
+    target.appendChild(draggedTask)
+  }
 }
 
 tasksElements = columnsContainer.querySelector('.tasks');
