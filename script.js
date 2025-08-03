@@ -113,7 +113,7 @@ column.querySelector('.count').dataset.tasks = taskCount
 
 const observeTaskChange = () =>{
  for (const column of columns) {
-    const observer = new MutationObserver(() => updateTaskCount(column));
-    observer.observe(column.querySelector(".tasks"), { childList: true });
+    const observeChanges = new MutationObserver(() => updateTaskCount(column));
+    observeChanges.observe(column.querySelector(".tasks"), { childList: true });
   }}
 observeTaskChange()
