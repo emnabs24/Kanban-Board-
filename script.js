@@ -57,7 +57,6 @@ const handleAdd = (event) => {
   const taskEl = event.target.closest(".column").lastElementChild;
   const input = createTaskInput();
   taskEl.appendChild(input);
-  updateTaskCount(column)
   input.focus();
 };
 
@@ -82,13 +81,12 @@ const handleDelete = (event) => {
     100
   );
   modal.showModal();
-  updateTaskCount(column)
 };
 
 modal.querySelector("#confirm").addEventListener("click", () => {
   if (currentTask) {
     currentTask.remove();
-    currentTask === null;
+    currentTask = null;
   }
   modal.close();
 });
@@ -113,4 +111,9 @@ const taskCount = tasks.length;
 column.querySelector('.count').dataset.tasks = taskCount
 };
 
-
+const observeTaskChange = () =>{
+ for (const column of columns) {
+    const observer = new MutationObserver(() => updateTaskCount(column));
+    observer.observe(column.querySelector(".tasks"), { childList: true });
+  }}
+observeTaskChange()
