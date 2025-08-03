@@ -57,6 +57,7 @@ const handleAdd = (event) => {
   const taskEl = event.target.closest(".column").lastElementChild;
   const input = createTaskInput();
   taskEl.appendChild(input);
+  updateTaskCount(column)
   input.focus();
 };
 
@@ -75,37 +76,41 @@ const handleEdit = (event) => {
 };
 
 const handleDelete = (event) => {
-   currentTask = event.target.closest(".task");
+  currentTask = event.target.closest(".task");
   modal.querySelector(".preview").innerText = currentTask.innerText.substring(
     0,
     100
   );
   modal.showModal();
+  updateTaskCount(column)
 };
 
-// modal.addEventListener("submit", () => {
-//   modal.querySelector("#modal").addEventListener("click", () => modal.close());
-// });
-
-modal.querySelector('#confirm').addEventListener("click", () => {
+modal.querySelector("#confirm").addEventListener("click", () => {
   if (currentTask) {
     currentTask.remove();
-    currentTask === null
+    currentTask === null;
   }
-  modal.close()
+  modal.close();
 });
 
 modal.querySelector("#cancel").addEventListener("click", () => modal.close());
 
-
 let tasks = [
-  ['Watch football','Practice Coding', 'Take Some Break'],
-  ['Take a Walk','Watch youtube videos', 'Gist with my friends'],
-  ['Play Golf','Go to Church', 'Play Basketball']
-]
+  ["Watch football", "Practice Coding", "Take Some Break"],
+  ["Take a Walk", "Watch youtube videos", "Gist with my friends"],
+  ["Play Golf", "Go to Church", "Play Basketball"],
+];
 
 tasks.forEach((col, i) => {
-  for(let item of col){
-    columns[i].querySelector('.tasks').appendChild(createTask(item));
+  for (let item of col) {
+    columns[i].querySelector(".tasks").appendChild(createTask(item));
   }
 });
+
+const updateTaskCount = (column) => {
+  const tasks = column.querySelector('.tasks').children;
+const taskCount = tasks.length;
+column.querySelector('.count').dataset.tasks = taskCount
+};
+
+
