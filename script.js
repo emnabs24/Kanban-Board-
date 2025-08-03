@@ -1,7 +1,7 @@
 const modal = document.querySelector(".confirm-modal");
 const columnsContainer = document.querySelector(".columns");
 const columns = columnsContainer.querySelectorAll(".column");
-const currentTask = null;
+let currentTask = null;
 
 const tasksElements = (content) => {
   const task = document.createElement("div");
@@ -75,7 +75,7 @@ const handleEdit = (event) => {
 };
 
 const handleDelete = (event) => {
-  const currentTask = event.target.closest(".task");
+   currentTask = event.target.closest(".task");
   modal.querySelector(".preview").innerText = currentTask.innerText.substring(
     0,
     100
@@ -87,10 +87,12 @@ const handleDelete = (event) => {
 //   modal.querySelector("#modal").addEventListener("click", () => modal.close());
 // });
 
-modal.addEventListener("click", () => {
+modal.querySelector('#confirm').addEventListener("click", () => {
   if (currentTask) {
     currentTask.remove();
+    currentTask === null
   }
+  modal.close()
 });
 
 modal.querySelector("#cancel").addEventListener("click", () => modal.close());
