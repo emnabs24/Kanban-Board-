@@ -98,3 +98,8 @@ modal.querySelector('#confirm').addEventListener("click", () => {
 modal.querySelector("#cancel").addEventListener("click", () => modal.close());
 
 
+let tasks = [
+  ['Watch football','Practice Coding', 'Take Some Break'],
+  ['Take a Walk','Watch youtube videos', 'Gist with my friends'],
+  ['Play Golf','Go to Church', 'Play Basketball']
+]
