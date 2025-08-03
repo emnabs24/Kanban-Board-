@@ -63,6 +63,14 @@ const createTaskInput = (text = "") => {
   return input;
 };
 
+const handleDragOver = (event) =>{
+  event.preventDefault();
+  const draggedTask = document.querySelector('.dragging');
+  const target = event.target.closest('.task, .tasks');;
+  if(target === '' || target ===draggedTask)return;
+  
+}
+
 tasksElements = columnsContainer.querySelector('.tasks');
 for(const taskEl of tasksElements){
   taskEl.addEventListener('dragover', handleDragOver);
