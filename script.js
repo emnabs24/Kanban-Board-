@@ -38,8 +38,10 @@ const createTask = (content) => {
                 <menu>
                 <button data-edit=""><i class="bi bi-pencil-square"></i></button>
                 <button data-delete><i class="bi bi-trash"></i></button>
-              </menu>
-`;
+                </menu>
+                `;
+  task.addEventListener("dragstart", handleDragStart);
+  task.addEventListener("dragend", handleDragEnd);
   return task;
 };
 
@@ -106,14 +108,15 @@ tasks.forEach((col, i) => {
 });
 
 const updateTaskCount = (column) => {
-  const tasks = column.querySelector('.tasks').children;
-const taskCount = tasks.length;
-column.querySelector('.count').dataset.tasks = taskCount
+  const tasks = column.querySelector(".tasks").children;
+  const taskCount = tasks.length;
+  column.querySelector(".count").dataset.tasks = taskCount;
 };
 
-const observeTaskChange = () =>{
- for (const column of columns) {
+const observeTaskChange = () => {
+  for (const column of columns) {
     const observeChanges = new MutationObserver(() => updateTaskCount(column));
     observeChanges.observe(column.querySelector(".tasks"), { childList: true });
-  }}
-observeTaskChange()
+  }
+};
+observeTaskChange();
